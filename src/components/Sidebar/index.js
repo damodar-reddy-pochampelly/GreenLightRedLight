@@ -1,4 +1,6 @@
+import {useContext} from 'react'
 import {withRouter} from 'react-router-dom'
+import {GameContext} from '../../Context/UserContext'
 
 import {
   SidebarContainer,
@@ -14,22 +16,57 @@ import {
   ProfileContainer,
   ProfileImage,
   UserName,
+  GameIcon,
+  ProfileIcon,
 } from './styledComponents'
 
 const Sidebar = props => {
+  const {userData, sideBarStatus} = useContext(GameContext)
+
+  const currentUser = userData[userData.length - 1]
+
   const handleLeaderBoardView = () => {
     const {history} = props
     history.replace('/leaderboard')
   }
 
+  const handleNewUser = () => {
+    const {history} = props
+    history.replace('/')
+  }
+
+  const handleNewGame = () => {
+    const {history} = props
+    history.replace('/play')
+  }
+
+  const page = window.location.href.split('/')
+  const pathOfPage = page[page.length - 1]
+
   return (
-    <SidebarContainer>
+    <SidebarContainer show={sideBarStatus.toString()}>
       <SidebarMenu>
         <ProfileContainer>
-          <ProfileImage src="https://assets.ccbp.in/frontend/react-js/esther-howard-img.png" />
-          <UserName>Name</UserName>
+          <ProfileImage src="https://xsgames.co/randomusers/avatar.php?g=male" />
+          <UserName>{currentUser.name}</UserName>
         </ProfileContainer>
-        <SidebarOption onClick={handleLeaderBoardView}>
+        <SidebarOption onClick={handleNewUser}>
+          <ProfileIcon />
+          <Option>New Player</Option>
+        </SidebarOption>
+        <SidebarOption
+          active={(pathOfPage === 'play').toString()}
+          onClick={handleNewGame}
+        >
+          <GameIcon />
+          <Option>
+            {pathOfPage === 'leaderboard' ? 'Playground' : 'In Game'}
+          </Option>
+        </SidebarOption>
+        <SidebarOption
+          onClick={handleLeaderBoardView}
+          active={(pathOfPage === 'leaderboard').toString()}
+        >
           <LeaderBoardIcon />
           <Option>Leader Board</Option>
         </SidebarOption>

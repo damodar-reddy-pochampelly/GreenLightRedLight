@@ -1,20 +1,24 @@
 import styled, {keyframes, css} from 'styled-components'
+import {GiHamburgerMenu} from 'react-icons/gi'
 
 export const HeaderContainer = styled.header`
-  //   background-color: #000000;
   height: 10vh;
   display: flex;
-  justify-content: center;
   align-items: center;
-  //   background-color: #001f3f;
-  //background-color: #36454f;
   background-color: #1a1a1d;
+  @media screen and (min-width: 992px) {
+    height: 12vh;
+  }
 `
 
 export const GameName = styled.h1`
   color: #ffffff;
   margin-top: 0px;
   margin-bottom: 0px;
+  display: flex;
+  align-items: center;
+  flex-grow: 1;
+  justify-content: center;
 `
 
 // Define keyframe animations for pulse effect
@@ -43,25 +47,33 @@ const redPulse = keyframes`
 `
 
 export const ColoredText = styled.span`
-  font-weight: bold; /* Make the text bold */
-  font-size: 24px;
-  margin: 0 10px; /* Add spacing between the text */
-  text-transform: uppercase; /* Convert text to uppercase */
-  letter-spacing: 2px; /* Add letter spacing */
-  transition: color 0.3s ease-in-out; /* Smooth color transition on hover */
+  font-weight: bold;
+  font-size: 15px;
+  @media screen and (min-width: 768px) {
+    font-size: 24px;
+  }
+  margin: 0 10px;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  transition: color 0.3s ease-in-out;
 
-  /* Apply color based on props */
-  color: ${props => (props.isGreen ? '#00FF00' : '#FF0000')};
+  color: ${props => (props.isgreen === 'true' ? '#00FF00' : '#FF0000')};
 
-  /* Add hover effect for text color */
   &:hover {
-    color: ${props => (props.isGreen ? 'lightgreen' : 'tomato')};
+    color: ${props => (props.isgreen === 'true' ? 'lightgreen' : 'tomato')};
   }
 
-  /* Add animation effect */
   ${props =>
-    props.animate &&
+    props.animate === 'true' &&
     css`
       animation: ${props.isGreen ? greenPulse : redPulse} 1s infinite;
     `}
+`
+
+export const MenuIcon = styled(GiHamburgerMenu)`
+  color: #ffffff;
+  margin-left: 20px;
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
 `

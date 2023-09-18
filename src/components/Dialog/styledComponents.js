@@ -17,6 +17,10 @@ export const DialogBox = styled.div`
   padding: 20px;
   text-align: center;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  width: 80%;
+  @media screen and (min-width: 768px) {
+    width: 410px;
+  }
 `
 
 export const DialogMessage = styled.p`
@@ -48,5 +52,5 @@ export const PlayAgainButton = styled.button`
 export const ViewLeaderBoardButton = styled(PlayAgainButton)``
 
 export const GameResult = styled.span`
-  color: ${props => props.labelColor};
+  color: ${props => props.labelcolor};
 `

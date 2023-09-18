@@ -33,11 +33,7 @@ const RegistrationForm = props => {
     mobile: '',
   })
 
-  const {setUserData} = useContext(GameContext)
-  //   const handleStartGame = () => {
-  //     setUserData(formData)
-  //     // Optionally, you can navigate to the game component here.
-  //   }
+  const {userData, setUserData} = useContext(GameContext)
 
   const isValidEmail = email => {
     // Basic email validation regex
@@ -101,8 +97,14 @@ const RegistrationForm = props => {
 
     // Check if there are any validation errors
     if (Object.values(errors).every(error => error === '')) {
+      //   setUserData(formData)
+      const filteredData = userData.filter(
+        data => JSON.stringify(data) !== JSON.stringify(formData),
+      )
+      const updatedUserData = [...filteredData, formData]
+      setUserData(updatedUserData)
+      localStorage.setItem('playerData', JSON.stringify(updatedUserData))
       const {history} = props
-      setUserData(formData)
       history.replace('/play')
     }
 
@@ -157,8 +159,8 @@ const RegistrationForm = props => {
               </InputLabel>
               <DropdownElement
                 id="difficulty"
-                name="difficulty"
-                value={formData.difficulty}
+                name="difficultyLevel"
+                value={formData.difficultyLevel}
                 onChange={handleInputChange}
               >
                 <OptionElement value="Easy">Easy</OptionElement>

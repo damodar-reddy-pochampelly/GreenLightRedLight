@@ -1,16 +1,28 @@
 import styled from 'styled-components'
 import {MdLeaderboard} from 'react-icons/md'
+import {IoLogoGameControllerB} from 'react-icons/io'
+import {CgProfile} from 'react-icons/cg'
 
 export const SidebarContainer = styled.div`
-  //   background-color: #1e293b;
-  //   background-color: #b3e0ff;
-  //   background-color: #4a6172;
   background-color: #191919;
-  width: 18vw;
-  display: flex;
+  @media screen and (max-width: 768px) {
+    display: ${props => {
+      if (props.show === 'true') {
+        return 'flex'
+      }
+      return 'none'
+    }};
+    width: 50vw;
+  }
   flex-direction: column;
   justify-content: space-between;
-  //   padding: 20px;
+  @media screen and (min-width: 768px) {
+    display: flex;
+    width: 30vw;
+  }
+  @media screen and (min-width: 992px) {
+    width: 18vw;
+  }
 `
 
 export const SidebarMenu = styled.ul`
@@ -18,7 +30,6 @@ export const SidebarMenu = styled.ul`
   padding-left: 0px;
   display: flex;
   flex-direction: column;
-  //   align-items: center;
 `
 
 export const ProfileContainer = styled.li`
@@ -34,32 +45,38 @@ export const ProfileImage = styled.img`
 `
 
 export const UserName = styled.p`
-  color: #001f3f;
-  color: #f2f2f2;
   color: #ffffff;
-  padding-left: 25px;
+  padding-left: 10px;
 `
 
 export const SidebarOption = styled.li`
   display: flex;
   align-items: center;
   cursor: pointer;
-  &:hover {
-    background-color: #66c2ff; /* Lighter blue background color on hover */
-    background-color: #4a90e2;
-    color: #001f3f; /* Dark Gray text color on hover */
-  }
+  background-color: ${props => {
+    if (props.active === 'true') {
+      return '#4a90e2'
+    }
+    return '#191919'
+  }};
   padding-left: 30px;
 `
 
 export const LeaderBoardIcon = styled(MdLeaderboard)`
-  color: #001f3f;
+  color: #ffffff;
+  margin-right: 5px;
+`
+
+export const GameIcon = styled(IoLogoGameControllerB)`
+  color: #ffffff;
+  margin-right: 5px;
+`
+export const ProfileIcon = styled(CgProfile)`
   color: #ffffff;
   margin-right: 5px;
 `
 
 export const Option = styled.p`
-  color: #001f3f;
   color: #ffffff;
   font-weight: bold;
   font-size: 16px;
@@ -73,7 +90,6 @@ export const ContactUsHeading = styled.p`
   font-family: 'Roboto';
   font-size: 15px;
   font-weight: 500;
-  color: #001f3f;
   color: #ffffff;
 `
 export const SocialMediaIconsContainer = styled.div`
@@ -86,7 +102,6 @@ export const ContactUsWishes = styled(ContactUsHeading)`
   width: 70%;
   font-weight: 400;
   line-height: 1.25;
-  color: #001f3f;
   color: #ffffff;
 `
 

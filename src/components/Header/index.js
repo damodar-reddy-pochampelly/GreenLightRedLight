@@ -1,14 +1,31 @@
-import {HeaderContainer, GameName, ColoredText} from './styledComponents'
+import {useContext} from 'react'
+import {GameContext} from '../../Context/UserContext'
 
-const Header = () => (
-  <HeaderContainer>
-    <GameName>
-      <ColoredText isGreen animate>
-        Green Lights{' '}
-      </ColoredText>
-      <ColoredText animate>Red Lights</ColoredText>
-    </GameName>
-  </HeaderContainer>
-)
+import {
+  HeaderContainer,
+  GameName,
+  ColoredText,
+  MenuIcon,
+} from './styledComponents'
+
+const Header = () => {
+  const {sideBarStatus, setSideBarStatus} = useContext(GameContext)
+
+  const handleMenuToggle = () => {
+    setSideBarStatus(prevStatus => !prevStatus)
+  }
+
+  return (
+    <HeaderContainer>
+      <MenuIcon onClick={handleMenuToggle} />
+      <GameName>
+        <ColoredText isgreen="true" animate="true">
+          Green Lights{' '}
+        </ColoredText>
+        <ColoredText animate="true">Red Lights</ColoredText>
+      </GameName>
+    </HeaderContainer>
+  )
+}
 
 export default Header

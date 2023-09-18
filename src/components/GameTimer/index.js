@@ -1,6 +1,5 @@
 import {useState, useEffect} from 'react'
-import {TimeLeft, TimeRemaining} from './styledComponents'
-// import '../../App.css'
+import {TimeLeft, TimeRemaining, TimerContainer} from './styledComponents'
 
 const GameTimer = ({timeLimit, onTimeout, running}) => {
   const [timeRemaining, setTimeRemaining] = useState(timeLimit)
@@ -25,7 +24,6 @@ const GameTimer = ({timeLimit, onTimeout, running}) => {
   }, [timeRemaining, onTimeout])
 
   const formatTime = seconds => {
-    // const minutes = Math.floor(seconds / 60)
     const remainingSeconds = seconds % 60
 
     let color
@@ -49,10 +47,10 @@ const GameTimer = ({timeLimit, onTimeout, running}) => {
   }
 
   if (!running) {
-    return null // or return an empty fragment <> </>;
+    return null
   }
 
-  return <div className="timer">{formatTime(timeRemaining)}</div>
+  return <TimerContainer>{formatTime(timeRemaining)}</TimerContainer>
 }
 
 export default GameTimer

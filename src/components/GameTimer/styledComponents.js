@@ -11,3 +11,8 @@ export const TimeRemaining = styled.span`
   font-family: 'sans-serif';
   font-weight: bold;
 `
+
+export const TimerContainer = styled.div`
+  text-align: center;
+  margin-bottom: 10px;
+`

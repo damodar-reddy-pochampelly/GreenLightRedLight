@@ -1,20 +1,49 @@
 import {FiArrowUp, FiArrowDown} from 'react-icons/fi'
 import styled from 'styled-components'
 
+export const ViewBoardPageBgContainer = styled.div``
+
+export const SidebarTableContainer = styled.div`
+  display: flex;
+`
+
 export const LeaderBoardBgContainer = styled.div`
-  max-width: 800px;
   margin: 0 auto;
   padding: 20px;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #f2f2f2;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  height: 75vh;
+  height: 90vh;
+  width: ${props => {
+    if (props.show === 'true') {
+      return '50vw'
+    }
+    return '100vw'
+  }};
+  overflow-x: auto;
+  @media screen and (min-width: 768px) {
+    width: 70vw;
+  }
+  @media screen and (min-width: 992px) {
+    width: 82vw;
+    padding-left: 20px;
+    padding-right: 20px;
+    height: 88vh;
+  }
 `
 export const DropdownContainer = styled.div``
 
-export const LevelLabel = styled.label``
+export const LevelLabel = styled.label`
+  color: #333333;
+  font-weight: normal;
+`
 
-export const LevelDropdown = styled.select``
+export const LevelDropdown = styled.select`
+  background-color: #33adff;
+  color: #333333;
+  padding: 5px;
+  font-size: 14px;
+`
 
 export const LevelOption = styled.option``
 
@@ -28,15 +57,16 @@ export const TableElement = styled.table`
   width: 100%;
   border-collapse: collapse;
   margin-top: 20px;
+  border: 1px solid #ccc;
 
   td {
     padding: 10px;
-    border-bottom: 1px solid #ecf0f1;
+    border: 1px solid #ccc;
   }
 
   th {
-    background-color: #2c3e50;
-    color: #ecf0f1;
+    background-color: #4a90e2;
+    color: #ffffff;
     padding: 10px;
     text-align: left;
   }

@@ -2,7 +2,7 @@ body {
   padding: 0px;
 }
 
-.dialog-container {
+/* .dialog-container {
   position: fixed;
   top: 0;
   left: 0;
@@ -132,4 +132,4 @@ body {
 
 .win-percentage-cell {
   cursor: pointer;
-}
+} */

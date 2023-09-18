@@ -3,65 +3,76 @@ import {createContext, useState} from 'react'
 const GameContext = createContext()
 
 const GameProvider = ({children}) => {
-  const [userData, setUserData] = useState(null)
-  const [games, setGames] = useState([])
+  const stringfiedPlayerData = localStorage.getItem('playerData')
+  const parsedPlayerData = JSON.parse(stringfiedPlayerData)
+  const [userData, setUserData] = useState(
+    parsedPlayerData === null ? [] : parsedPlayerData,
+  )
+  const [sideBarStatus, setSideBarStatus] = useState(false)
 
-  const updateGameStats = (email, result) => {
-    setGames(prevGames => {
-      const updatedGames = [...prevGames]
-
-      let userIndex = updatedGames.findIndex(user => user.email === email)
-
-      if (userIndex === -1) {
-        userIndex = updatedGames.length
-        updatedGames.push({
-          email,
-          name: userData.name,
-          mobile: userData.mobileNumber,
-          gamesPlayed: 0,
-          gamesWon: 0,
-          winPercentage: 0,
-          levelStats: {
-            Easy: {played: 0, won: 0, winPercentage: 0},
-            Medium: {played: 0, won: 0, winPercentage: 0},
-            Hard: {played: 0, won: 0, winPercentage: 0},
-          },
-        })
-      }
-      const {difficultyLevel} = userData
-
-      updatedGames[userIndex].levelStats[difficultyLevel].played += 1
-
-      if (result === 'Won') {
-        updatedGames[userIndex].gamesWon += 1
-        updatedGames[userIndex].levelStats[difficultyLevel].won += 1
-      }
-
-      updatedGames[userIndex].gamesPlayed += 1
-
-      const difficultyLevelArray = ['Easy', 'Medium', 'Hard']
-
-      difficultyLevelArray.forEach(level => {
-        const levelStats = updatedGames[userIndex].levelStats[level]
-        levelStats.winPercentage =
-          (levelStats.won / levelStats.played) * 100 || 0
+  const updateGameStats = (currentPlayer, result) => {
+    setUserData(prevData => {
+      const updatedData = prevData.map(eachData => {
+        const sameMail = eachData.email === currentPlayer.email
+        // const sameName = eachData.name === currentPlayer.name
+        const sameLevel =
+          eachData.difficultyLevel === currentPlayer.difficultyLevel
+        // const sameMobile = eachData.mobile === currentPlayer.mobile
+        const condition = sameMail && sameLevel
+        if (condition) {
+          if (currentPlayer.gamesPlayed !== undefined) {
+            const newObject = {...currentPlayer}
+            if (result === 'Won') {
+              return {
+                ...newObject,
+                gamesPlayed: currentPlayer.gamesPlayed + 1,
+                gamesWon: currentPlayer.gamesWon + 1,
+                winPercentage:
+                  ((currentPlayer.gamesWon + 1) /
+                    (currentPlayer.gamesPlayed + 1)) *
+                  100,
+              }
+            }
+            return {
+              ...newObject,
+              gamesPlayed: currentPlayer.gamesPlayed + 1,
+              winPercentage:
+                (currentPlayer.gamesWon / (currentPlayer.gamesPlayed + 1)) *
+                100,
+            }
+          }
+          const newObject = {...currentPlayer}
+          if (result === 'Won') {
+            return {
+              ...newObject,
+              gamesPlayed: 1,
+              gamesWon: 1,
+              winPercentage: 100,
+            }
+          }
+          return {
+            ...newObject,
+            gamesPlayed: 1,
+            gamesWon: 0,
+            winPercentage: 0,
+          }
+        }
+        return eachData
       })
-
-      const totalWeightedWinPercentage =
-        (updatedGames[userIndex].levelStats.Easy.won * 20 +
-          updatedGames[userIndex].levelStats.Medium.won * 30 +
-          updatedGames[userIndex].levelStats.Hard.won * 50) /
-        updatedGames[userIndex].gamesPlayed
-
-      updatedGames[userIndex].winPercentage = totalWeightedWinPercentage || 0
-
-      return updatedGames
+      localStorage.setItem('playerData', JSON.stringify(updatedData))
+      return updatedData
     })
   }
 
   return (
     <GameContext.Provider
-      value={{userData, setUserData, games, setGames, updateGameStats}}
+      value={{
+        userData,
+        setUserData,
+        updateGameStats,
+        sideBarStatus,
+        setSideBarStatus,
+      }}
     >
       {children}
     </GameContext.Provider>

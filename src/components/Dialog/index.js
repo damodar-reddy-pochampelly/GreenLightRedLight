@@ -23,7 +23,7 @@ const Dialog = props => {
     <DialogBgContainer>
       <DialogBox>
         <DialogMessage>
-          You <GameResult labelColor={labelColor}>{gameResult}</GameResult>!
+          You <GameResult labelcolor={labelColor}>{gameResult}</GameResult>!
         </DialogMessage>
         <TotalScore>Score: {score}</TotalScore>
         <DialogButtonsContainer>

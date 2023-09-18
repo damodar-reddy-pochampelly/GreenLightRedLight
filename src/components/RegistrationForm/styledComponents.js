@@ -2,12 +2,9 @@ import styled from 'styled-components'
 
 export const BgContainer = styled.div`
   display: flex;
-  display: flex;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-image: url('');
-  background-size: cover;
   background-color: black;
 `
 
@@ -18,15 +15,32 @@ export const LoginBgContainer = styled.div`
 `
 
 export const FormContainer = styled.div`
-  background-color: #ffffff;
-  width: 40%;
+  width: 100%;
   padding: 25px;
-  border-bottom-right-radius: 5px;
-  border-top-right-radius: 5px;
+  border-radius: 5px;
+  background-image: url('https://i.ibb.co/myTtffM/1177232.jpg');
+  background-size: cover;
+  @media screen and (min-width: 768px) {
+    width: 50%;
+    border-bottom-left-radius: 0px;
+    border-top-left-radius: 0px;
+    background-image: none;
+    background-color: #ffffff;
+  }
+  @media screen and (min-width: 992px) {
+    width: 40%;
+  }
 `
 
 export const ImageContainer = styled.div`
-  width: 60%;
+  display: none;
+  @media screen and (min-width: 768px) {
+    width: 50%;
+    display: block;
+  }
+  @media screen and (min-width: 992px) {
+    width: 60%;
+  }
 `
 
 export const Image = styled.img`
@@ -40,6 +54,10 @@ export const Heading = styled.div`
   font-size: 20px;
   font-weight: 500;
   margin-bottom: 20px;
+  color: #ffffff;
+  @media screen and (min-width: 768px) {
+    color: #000000;
+  }
 `
 
 export const Form = styled.form`
@@ -54,15 +72,17 @@ export const InputFieldContainer = styled.div`
 `
 
 export const InputLabel = styled.label`
-  color: #7e858e;
+  color: #ffffff;
   font-family: 'Roboto';
   font-size: 13px;
   font-weight: 500;
+  @media screen and (min-width: 768px) {
+    color: #7e858e;
+  }
 `
 
 export const InputField = styled.input`
   color: #475569;
-  background-color: transparent;
   font-family: 'Roboto';
   font-size: 15px;
   font-weight: normal;
@@ -71,6 +91,9 @@ export const InputField = styled.input`
   margin-top: 10px;
   outline: none;
   border-radius: 5px;
+  @media screen and (min-width: 768px) {
+    background-color: transparent;
+  }
 `
 
 export const DropdownElement = styled.select`

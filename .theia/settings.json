@@ -3,9 +3,12 @@
         "Cotainer",
         "apos",
         "boxcolor",
+        "isgreen",
+        "labelcolor",
         "lightgreen",
         "rippleactive",
         "ripplex",
-        "rippley"
+        "rippley",
+        "stringfied"
     ]
 }
