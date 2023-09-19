@@ -10,14 +10,13 @@ const GameProvider = ({children}) => {
   )
   const [sideBarStatus, setSideBarStatus] = useState(false)
 
+  // updating gameStats
   const updateGameStats = (currentPlayer, result) => {
     setUserData(prevData => {
       const updatedData = prevData.map(eachData => {
         const sameMail = eachData.email === currentPlayer.email
-        // const sameName = eachData.name === currentPlayer.name
         const sameLevel =
           eachData.difficultyLevel === currentPlayer.difficultyLevel
-        // const sameMobile = eachData.mobile === currentPlayer.mobile
         const condition = sameMail && sameLevel
         if (condition) {
           if (currentPlayer.gamesPlayed !== undefined) {

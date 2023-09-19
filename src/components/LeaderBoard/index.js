@@ -36,10 +36,13 @@ const Leaderboard = () => {
   const [currentPage, setCurrentPage] = useState(1)
   const itemsPerPage = 10
 
+  // filtering based on Difficulty Level
   const filteredGames = userData.filter(
     data =>
       data.difficultyLevel === selectedLevel && data.gamesPlayed !== undefined,
   )
+
+  // Sorted based on win percentage
   const getSortedArray = () => {
     if (sortOrder === 'desc') {
       return filteredGames
@@ -51,6 +54,7 @@ const Leaderboard = () => {
       .sort((a, b) => a.winPercentage - b.winPercentage)
   }
 
+  // toggling the sort order
   const toggleSortOrder = () => {
     setSortOrder(prev => (prev === 'asc' ? 'desc' : 'asc'))
   }
@@ -63,6 +67,8 @@ const Leaderboard = () => {
   const indexOfLastItem = currentPage * itemsPerPage
   const indexOfFirstItem = indexOfLastItem - itemsPerPage
   const currentItems = sortedArray.slice(indexOfFirstItem, indexOfLastItem)
+
+  // pagination
 
   const renderPageNumbers = () => {
     const pageNumbers = Math.ceil(filteredGames.length / itemsPerPage)

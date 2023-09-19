@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable jsx-a11y/media-has-caption */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
@@ -30,21 +31,28 @@ const difficultySettings = {
 }
 
 const GreenLightRedLight = () => {
+  // context
   const {userData, setUserData, updateGameStats, sideBarStatus} = useContext(
     GameContext,
   )
+
+  // states
   const [gameStarted, setGameStarted] = useState(false)
   const [boxColor, setBoxColor] = useState('red')
   const [score, setScore] = useState(0)
   const [showDialog, setShowDialog] = useState(false)
   const [gameResult, setGameResult] = useState('')
+
+  // audio and level references
   const audioRef = useRef(null)
   const errorAudioRef = useRef(null)
   const successAudioRef = useRef(null)
   const levelRef = useRef(null)
 
+  // getting the current player
   const currentPlayer = userData[userData.length - 1]
 
+  // updating on game over
   const gameOver = () => {
     setGameStarted(false)
     setBoxColor('red')
@@ -63,6 +71,7 @@ const GreenLightRedLight = () => {
     }
   }
 
+  // updating on game won
   const gameWon = () => {
     setGameStarted(false)
     setBoxColor('red')

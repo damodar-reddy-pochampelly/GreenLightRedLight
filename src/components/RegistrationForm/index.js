@@ -36,14 +36,12 @@ const RegistrationForm = props => {
   const {userData, setUserData} = useContext(GameContext)
 
   const isValidEmail = email => {
-    // Basic email validation regex
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/ // Basic email validation regex
     return emailRegex.test(email)
   }
 
   const isValidMobile = mobile => {
-    // Basic mobile number validation regex (10 digits)
-    const mobileRegex = /^\d{10}$/
+    const mobileRegex = /^\d{10}$/ // Basic mobile number validation regex (10 digits)
     return mobileRegex.test(mobile)
   }
 
