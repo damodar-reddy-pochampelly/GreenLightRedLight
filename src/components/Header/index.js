@@ -9,7 +9,7 @@ import {
 } from './styledComponents'
 
 const Header = () => {
-  const {sideBarStatus, setSideBarStatus} = useContext(GameContext)
+  const {setSideBarStatus} = useContext(GameContext)
 
   const handleMenuToggle = () => {
     setSideBarStatus(prevStatus => !prevStatus)

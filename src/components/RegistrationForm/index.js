@@ -99,9 +99,21 @@ const RegistrationForm = props => {
     if (Object.values(errors).every(error => error === '')) {
       //   setUserData(formData)
       const filteredData = userData.filter(
-        data => JSON.stringify(data) !== JSON.stringify(formData),
+        data =>
+          data.email !== formData.email ||
+          data.difficultyLevel !== formData.difficultyLevel,
       )
-      const updatedUserData = [...filteredData, formData]
+      const commonData = userData.find(
+        data =>
+          data.email === formData.email &&
+          data.difficultyLevel === formData.difficultyLevel,
+      )
+      let updatedUserData
+      if (commonData !== undefined) {
+        updatedUserData = [...filteredData, commonData]
+      } else {
+        updatedUserData = [...filteredData, formData]
+      }
       setUserData(updatedUserData)
       localStorage.setItem('playerData', JSON.stringify(updatedUserData))
       const {history} = props
